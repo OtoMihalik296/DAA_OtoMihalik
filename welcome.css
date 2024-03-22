@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&display=swap');
+
+* {
+    margin: 0;
+    box-sizing: border-box;    
+}
+
+body {
+    font-family: 'Maven Pro';
+    background-image: linear-gradient(
+        120deg,
+        rgba(7, 7, 9, 1) 16%,
+        rgba(27, 24, 113, 1) 96%
+      );
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    transition: all 1s;
+}
+
+@keyframes gradientBG {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 100vh;
+}
+
+a {
+    color: #a5d523;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+span {
+    text-decoration: underline;
+}
