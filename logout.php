@@ -1,7 +1,7 @@
 <?php
    session_start(); //otvorenie session
 
-   unset($_SESSION["username"]); //vymazanie session
+   unset($_SESSION["meno"]); //vymazanie session
    
    echo '<link rel=stylesheet href="welcome.css">';
    echo '<div class=wrapper>';

@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-if (isset($_POST['submit']) && !empty($_POST['username']) && !empty($_POST['password'])) {
+if (isset($_POST['submit']) && !empty($_POST['meno']) && !empty($_POST['heslo'])) {
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "databazove";
+    $dbname = "databazove_mihalik";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -13,23 +13,23 @@ if (isset($_POST['submit']) && !empty($_POST['username']) && !empty($_POST['pass
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM user WHERE meno = '" . $_POST['username'] . "'";
+    $sql = "SELECT * FROM user WHERE meno = '" . $_POST['meno'] . "'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        if (password_verify($_POST['password'], $row["heslo"])) {
+        if (password_verify($_POST['heslo'], $row["heslo"])) {
             $_SESSION['valid'] = true;
             $_SESSION['timeout'] = time();
-            $_SESSION['username'] = $_POST['username'];
+            $_SESSION['meno'] = $_POST['meno'];
 
             header("Location: welcome.php");
             exit();
         } else {
-            echo "<p>Wrong password</p>";
+            echo "<p>Zlé heslo</p>";
         }
     } else {
-        echo "<p>User not found</p>";
+        echo "<p>Používateľ sa nenašiel</p>";
     }
 
     $conn->close();
@@ -45,8 +45,8 @@ if (isset($_POST['submit']) && !empty($_POST['username']) && !empty($_POST['pass
 <div class="wrapper">
     <form action="index.php" method="post">
         <h1>Prihláste sa</h1>
-        <input type="text" name="username" placeholder="username" required autofocus>
-        <input type="password" name="password" placeholder="password" required>
+        <input type="text" name="meno" placeholder="Zadajte meno" required autofocus>
+        <input type="password" name="heslo" placeholder="Zadajte heslo" required>
         <button type="submit" name="submit">Prihlásiť sa</button>
         <a href="register.php" id="Register">Registrovať sa</a>
     </form>

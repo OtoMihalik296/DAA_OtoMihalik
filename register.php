@@ -3,7 +3,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "databazove";
+    $dbname = "databazove_mihalik";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -12,20 +12,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     echo "";
 
-    $input_username = $_POST['username'];
-    $input_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $input_username = $_POST['meno'];
+    $input_password = password_hash($_POST['heslo'], PASSWORD_DEFAULT);
     $input_email = $_POST['email'];
 
     $check_username_sql = "SELECT * FROM user WHERE meno='$input_username'";
     $result = $conn->query($check_username_sql);
 
     if ($result->num_rows > 0) {
-        echo "<p>Username already exists. Please choose a different username.</p>";
+        echo "<p>Používateľ už existuje.</p>";
     } else {
         $insert_sql = "INSERT INTO user (meno, heslo, email) VALUES ('$input_username', '$input_password', '$input_email')";
 
         if ($conn->query($insert_sql) === TRUE) {
-            echo "<p>New record created successfully</p>";
+            echo "<p>Úspešné vytvorenie.</p>";
         } else {
             echo "Error: " . $insert_sql . "<br>" . $conn->error;
         }
@@ -43,9 +43,9 @@ echo '<body>';
 echo '<div class="wrapper">';
 echo '<form action="register.php" method="post">';
 echo '<h1>Registrácia</h1>';
-echo '<input type="email" name="email" placeholder="email" required>';
-echo '<input type="text" name="username" placeholder="username" required autofocus>';
-echo '<input type="password" name="password" placeholder="password" required>';
+echo '<input type="email" name="email" placeholder="Zadajte email" required>';
+echo '<input type="text" name="meno" placeholder="Zadajte meno" required autofocus>';
+echo '<input type="password" name="heslo" placeholder="Zadajte heslo" required>';
 echo '<button type="submit" name="submit">Registrovať sa</button>';
 echo '<a href="index.php" id="Register">Prihlásiť sa</a>';
 echo '</form>';
