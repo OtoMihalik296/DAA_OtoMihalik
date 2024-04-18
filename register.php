@@ -48,7 +48,7 @@ echo '<input type="email" name="email" placeholder="Zadajte email" required>';
 echo '<input type="text" name="meno" placeholder="Zadajte meno" required autofocus>';
 echo '<input type="password" name="heslo" placeholder="Zadajte heslo" required>';
 echo '<button type="submit" name="submit">Registrovať sa</button>';
-echo '<a href="index.php" id="Register">Prihlásiť sa</a>';
+echo '<a href="login.php" id="Register">Prihlásiť sa</a>';
 echo '</form>';
 echo '</div>';
 echo '</body>';

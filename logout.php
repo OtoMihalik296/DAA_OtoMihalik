@@ -9,5 +9,5 @@
    echo '<p>Smerujem naspäť.</p>';
    echo '</div>';
 
-   header('Refresh: 2; URL = index.php'); // presmerovanie na prihlasenie
+   header('Refresh: 2; URL = login.php'); // presmerovanie na prihlasenie
 ?>
