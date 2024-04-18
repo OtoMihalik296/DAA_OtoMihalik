@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&display=swap');
+
+* {
+    margin: 0;
+    box-sizing: border-box;    
+}
+
+body {
+    font-family: 'Maven Pro';
+    background-color: #f9f9f9;
+    transition: all 1s;
+    display: flex;
+}   
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.products {
+    display: flex;
+    flex-direction: row;
+}
+
+.product-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 20vw;
+    margin: 10px;
+    float: left;
+    height: 30vh;
+}
+.product-card img {
+    width: 100% !important;
+    height: 60% !important;
+    background-color: #ccc;
+    height: auto;
+}
+.product-card .product-info {
+    padding: 10px 0;
+}
