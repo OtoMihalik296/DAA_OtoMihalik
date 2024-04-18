@@ -13,24 +13,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "";
 
     $input_username = $_POST['meno'];
-    $input_password = password_hash($_POST['heslo'], PASSWORD_DEFAULT);
+    $input_password = mysqli_real_escape_string($conn, $_POST['heslo']); // Assuming $_POST['heslo'] is the password entered by the user
     $input_email = $_POST['email'];
-
+    $hashed_password = hash('sha256', $input_password);
+    
     $check_username_sql = "SELECT * FROM user WHERE meno='$input_username'";
     $result = $conn->query($check_username_sql);
 
     if ($result->num_rows > 0) {
         echo "<p>Používateľ už existuje.</p>";
     } else {
-        $insert_sql = "INSERT INTO user (meno, heslo, email) VALUES ('$input_username', '$input_password', '$input_email')";
-
+        // Use $hashed_password instead of $input_password
+        $insert_sql = "INSERT INTO user (meno, heslo, email) VALUES ('$input_username', '$hashed_password', '$input_email')";
+    
         if ($conn->query($insert_sql) === TRUE) {
             echo "<p>Úspešné vytvorenie.</p>";
         } else {
             echo "Error: " . $insert_sql . "<br>" . $conn->error;
         }
     }
-
     $conn->close();
 }
 
