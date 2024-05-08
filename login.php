@@ -25,7 +25,7 @@ if (isset($_POST['submit']) && !empty($_POST['meno']) && !empty($_POST['heslo'])
         
         if ($hashed_provided_password === $row["heslo"]) {
             // Password is correct
-            $_SESSION['valid'] = true;
+            $_SESSION['logged_in'] = true;
             $_SESSION['timeout'] = time();
             $_SESSION['meno'] = $_POST['meno'];
             
@@ -48,11 +48,11 @@ if (isset($_POST['submit']) && !empty($_POST['meno']) && !empty($_POST['heslo'])
 <html>
 <head>
     <title>Login form</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
 <div class="wrapper">
-    <form action="index.php" method="post">
+    <form action="login.php" method="post">
         <h1>Prihláste sa</h1>
         <input type="text" name="meno" placeholder="Zadajte meno" required autofocus>
         <input type="password" name="heslo" placeholder="Zadajte heslo" required>

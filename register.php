@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 echo '<html>';
 echo '<head>';
 echo '<title>Register form</title>';
-echo '<link rel="stylesheet" href="style.css">';
+echo '<link rel="stylesheet" href="login.css">';
 echo '</head>';
 echo '<body>';
 echo '<div class="wrapper">';
