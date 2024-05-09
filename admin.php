@@ -6,23 +6,18 @@ $username = "root";
 $password = "";
 $dbname = "databazove_mihalik";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if admin is already logged in, redirect to admin panel if true
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
     header("Location: admin_panel.php");
     exit;
 }
 
-// Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check if credentials are correct by querying the database
     $input_username = $_POST["username"];
     $input_password = $_POST["password"];
 
@@ -30,10 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $conn->query($sql);
 
     if ($result->num_rows == 1) {
-        // Set admin session
         $_SESSION['admin_logged_in'] = true;
 
-        // Redirect to admin panel
         header("Location: admin_panel.php");
         exit;
     } else {
@@ -41,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Close database connection
 $conn->close();
 ?>
 

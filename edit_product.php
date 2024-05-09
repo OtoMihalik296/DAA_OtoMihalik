@@ -26,9 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $_POST["description"];
     $price = $_POST["price"];
     $image_url = $_POST["image_url"];
-    $category = $_POST["category"]; // New line to retrieve category from form
+    $category = $_POST["category"];
 
-    // Validate inputs (you can add more validation as needed)
     if (empty($name)) {
         $errors[] = "Name is required";
     }
@@ -41,7 +40,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Price must be a positive number";
     }
 
-    // If there are no validation errors, proceed with update
     if (empty($errors)) {
         $sql = "UPDATE produkty SET nazov=?, popis=?, cena=?, image_url=?, id_kategorie=? WHERE id=?";
         $stmt = $conn->prepare($sql);
@@ -52,7 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($stmt->affected_rows > 0) {
                 echo "Product updated successfully";
-                // Redirect to a different page after successful update
                 header("Location: admin_panel.php");
                 exit;
             } else {
@@ -66,7 +63,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Fetch product details
 $id = $_GET["id"];
 $sql = "SELECT p.*, k.kategoria FROM produkty p JOIN kategorie k ON p.id_kategorie = k.id WHERE p.id=$id";
 $result = $conn->query($sql);
@@ -81,7 +77,6 @@ $price = $row["cena"];
 $image_url = $row["image_url"];
 $category = $row["id_kategorie"];
 
-// Fetch categories for dropdown
 $sql_categories = "SELECT * FROM kategorie";
 $result_categories = $conn->query($sql_categories);
 $categories = [];

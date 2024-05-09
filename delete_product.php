@@ -19,7 +19,6 @@ if ($conn->connect_error) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['confirm']) && $_POST['confirm'] === 'yes') {
-        // Remove product from database
         $productId = $_POST['product_id'];
         $sql = "DELETE FROM produkty WHERE id = ?";
         $stmt = $conn->prepare($sql);
@@ -29,7 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: admin_panel.php");
         exit;
     } else {
-        // Redirect back to admin panel
         header("Location: admin_panel.php");
         exit;
     }

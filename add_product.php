@@ -35,9 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $_POST["description"];
     $price = $_POST["price"];
     $image_url = $_POST["image_url"];
-    $category_id = $_POST["category"]; // Get selected category ID
+    $category_id = $_POST["category"];
 
-    // Validate inputs (you can add more validation as needed)
     if (empty($name)) {
         $errors[] = "Name is required";
     }
@@ -50,7 +49,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Price must be a positive number";
     }
 
-    // If there are no validation errors, proceed with insertion
     if (empty($errors)) {
         $sql = "INSERT INTO produkty (nazov, popis, cena, image_url, id_kategorie) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
