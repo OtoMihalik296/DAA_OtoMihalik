@@ -17,8 +17,10 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch products from the database
-$sql = "SELECT id, nazov AS name, popis AS description, cena AS price, image_url FROM produkty";
+// Fetch products with category information from the database
+$sql = "SELECT p.id, p.nazov AS name, p.popis AS description, p.cena AS price, p.image_url, k.kategoria AS category
+        FROM produkty p
+        INNER JOIN kategorie k ON p.id_kategorie = k.id";
 $result = $conn->query($sql);
 
 $products = [];
@@ -119,7 +121,7 @@ h2 {
     color: black;
 }
 
-    </style>
+</style>
 </head>
 <body>
     <div class="container">
@@ -128,13 +130,14 @@ h2 {
         <a href="add_product.php" id="addproduct">Pridať produkt</a>
         <div class="products">
             <?php
-            // Display products
+            // Display products with category information
             foreach ($products as $product) {
                 echo "<div class='product'>";
                 echo "<img src='" . $product['image_url'] . "' alt='" . $product['name'] . "'>";
                 echo "<div>";
                 echo "<h3>".$product['name']."</h3>";
                 echo "<p>".$product['price']." €</p>";
+                echo "<p>".$product['category']."</p>"; // Display category
                 echo "<div class='buttons'>";
                 echo "<a href='edit_product.php?id=".$product['id']."'>Upraviť</a>";
                 echo "<a href='delete_product.php?id=".$product['id']."'>Vymazať</a>";

@@ -20,11 +20,22 @@ if ($conn->connect_error) {
 $name = $description = $price = $image_url = "";
 $errors = [];
 
+// Fetch categories from the database
+$sql_categories = "SELECT id, kategoria FROM kategorie";
+$result_categories = $conn->query($sql_categories);
+$categories = [];
+if ($result_categories->num_rows > 0) {
+    while ($row = $result_categories->fetch_assoc()) {
+        $categories[] = $row;
+    }
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $description = $_POST["description"];
     $price = $_POST["price"];
     $image_url = $_POST["image_url"];
+    $category_id = $_POST["category"]; // Get selected category ID
 
     // Validate inputs (you can add more validation as needed)
     if (empty($name)) {
@@ -41,11 +52,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // If there are no validation errors, proceed with insertion
     if (empty($errors)) {
-        $sql = "INSERT INTO produkty (nazov, popis, cena, image_url) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO produkty (nazov, popis, cena, image_url, id_kategorie) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
-            $stmt->bind_param("ssds", $name, $description, $price, $image_url);
+            $stmt->bind_param("ssdsi", $name, $description, $price, $image_url, $category_id);
             $stmt->execute();
 
             if ($stmt->affected_rows > 0) {
@@ -134,7 +145,7 @@ $conn->close();
         li {
             list-style-type: none;
         }
-    </style>
+        </style>
 </head>
 <body>
     <h2>Pridajte produkt</h2>
@@ -154,6 +165,12 @@ $conn->close();
         <input type="number" id="price" name="price" min="0" step="0.01" value="<?php echo htmlspecialchars($price); ?>" required><br><br>
         <label for="image_url">Obrázok URL:</label>
         <input type="text" id="image_url" name="image_url" value="<?php echo htmlspecialchars($image_url); ?>" required><br><br>
+        <label for="category">Kategória:</label>
+        <select id="category" name="category">
+            <?php foreach ($categories as $category) : ?>
+                <option value="<?php echo $category['id']; ?>"><?php echo $category['kategoria']; ?></option>
+            <?php endforeach; ?>
+        </select><br><br>
         <input type="submit" value="Pridaj produkt">
     </form>
 </body>

@@ -17,7 +17,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$name = $description = $price = $image_url = "";
+$name = $description = $price = $image_url = $category = "";
 $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -26,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $_POST["description"];
     $price = $_POST["price"];
     $image_url = $_POST["image_url"];
+    $category = $_POST["category"]; // New line to retrieve category from form
 
     // Validate inputs (you can add more validation as needed)
     if (empty($name)) {
@@ -42,11 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // If there are no validation errors, proceed with update
     if (empty($errors)) {
-        $sql = "UPDATE produkty SET nazov=?, popis=?, cena=?, image_url=? WHERE id=?";
+        $sql = "UPDATE produkty SET nazov=?, popis=?, cena=?, image_url=?, id_kategorie=? WHERE id=?";
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
-            $stmt->bind_param("ssdsi", $name, $description, $price, $image_url, $id);
+            $stmt->bind_param("ssdsii", $name, $description, $price, $image_url, $category, $id);
             $stmt->execute();
 
             if ($stmt->affected_rows > 0) {
@@ -67,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Fetch product details
 $id = $_GET["id"];
-$sql = "SELECT * FROM produkty WHERE id=$id";
+$sql = "SELECT p.*, k.kategoria FROM produkty p JOIN kategorie k ON p.id_kategorie = k.id WHERE p.id=$id";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 if (!$row) {
@@ -78,6 +79,17 @@ $name = $row["nazov"];
 $description = $row["popis"];
 $price = $row["cena"];
 $image_url = $row["image_url"];
+$category = $row["id_kategorie"];
+
+// Fetch categories for dropdown
+$sql_categories = "SELECT * FROM kategorie";
+$result_categories = $conn->query($sql_categories);
+$categories = [];
+if ($result_categories->num_rows > 0) {
+    while ($row = $result_categories->fetch_assoc()) {
+        $categories[] = $row;
+    }
+}
 
 $conn->close();
 ?>
@@ -164,11 +176,12 @@ input[type="submit"]:hover {
     margin-bottom: 20px;
 }
 
-    </style>
+  
+</style>
 </head>
 <body>
     <div class="container">
-        <h2>Upraviť produkt</h2>
+        <h2>Edit Product</h2>
         <?php if (!empty($errors)) : ?>
             <ul class="errors">
                 <?php foreach ($errors as $error) : ?>
@@ -179,7 +192,7 @@ input[type="submit"]:hover {
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
             <div class="form-group">
-                <label for="name">Názov:</label>
+                <label for="name">Meno:</label>
                 <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>" required>
             </div>
             <div class="form-group">
@@ -193,6 +206,14 @@ input[type="submit"]:hover {
             <div class="form-group">
                 <label for="image_url">Obrázok URL:</label>
                 <input type="text" id="image_url" name="image_url" value="<?php echo htmlspecialchars($image_url); ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="category">Kategória:</label>
+                <select id="category" name="category" required>
+                    <?php foreach ($categories as $cat) : ?>
+                        <option value="<?php echo $cat['id']; ?>" <?php echo ($cat['id'] == $category) ? 'selected' : ''; ?>><?php echo $cat['kategoria']; ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <input type="submit" value="Update Product">
         </form>
