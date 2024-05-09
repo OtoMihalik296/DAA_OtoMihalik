@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2024 at 11:41 AM
+-- Generation Time: May 09, 2024 at 11:50 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -80,12 +80,16 @@ CREATE TABLE `produkty` (
 --
 
 INSERT INTO `produkty` (`id`, `nazov`, `popis`, `cena`, `image_url`, `id_kategorie`) VALUES
-(12, 'Macbook Air 13\" M1 Vesmírne sivý SK 2020', 'MacBook – Apple M1, 13,3\" IPS lesklý 2560 × 1600 px, RAM 8GB, Apple M1 7-jadrová GPU, SSD 256GB, podsvietená klávesnica, webkamera, USB-C, čítačka odtlačkov prstov, WiFi 6, hmotnosť 1,25 kg, macOS', 949, 'https://image.alza.cz/products/NL244a1a1/NL244a1a1.jpg?width=500&height=500', 1),
+(12, 'Macbook Air 13\" M1 Vesmírne sivý SK 2020', 'MacBook – Apple M1, 13,3\" IPS lesklý 2560 × 1600 px, RAM 8GB, Apple M1 7-jadrová GPU, SSD 256GB, podsvietená klávesnica, webkamera, USB-C, čítačka odtlačkov prstov, WiFi 6, hmotnosť 1,25 kg, macOS', 949, 'https://image.alza.cz/products/NL244a1a1/NL244a1a1.jpg?width=500&height=500', 3),
 (13, 'Macbook Air 13\" M2 SK 2022 Temne atramentový', 'MacBook – Apple M2 (8jádrový), 13,6\" IPS lesklý 2560 × 1664 px, RAM 8GB, Apple M2 8-jadrová GPU, SSD 256GB, podsvietená klávesnica, webkamera, USB-C, WiFi 6, hmotnosť 1,24 kg, macOS', 1099, 'https://image.alza.cz/products/NL245b1a1/NL245b1a1.jpg?width=500&height=500', 2),
 (14, 'Lenovo Legion Pro 5 16IRX8 Onyx Grey kovový', 'Herný notebook – Intel Core i9 13900HX Raptor Lake, 15.6\" IPS antireflexný 2560 × 1600 240Hz, RAM 32GB DDR5, NVIDIA GeForce RTX 4060 8GB 140 W (MUX Switch), SSD 1000GB, numerická klávesnica, podsvietená RGB klávesnica, webkamera, USB 3.2 Gen 1, USB-C', 1779, 'https://image.alza.cz/products/NT379k08q8/NT379k08q8.jpg?width=500&height=500', 1),
-(15, 'ASUS Vivobook Go 15 E1504GA-BQ133WS Mixed Black', 'Notebook – Intel Processor N100, 15.6\" IPS antireflexný 1920 × 1080, RAM 4GB DDR4, Intel UHD Graphics, Flash 128GB, numerická klávesnica, webkamera, USB 3.2 Gen 1, USB-C, WiFi 5, Bluetooth, hmotnosť 1,63 kg, Windows 11 S', 289, 'https://image.alza.cz/products/NAB519B1/NAB519B1.jpg?width=500&height=500', 1),
-(16, 'HP 14-em0920nc Natural Silver', 'Notebook – AMD Ryzen 5 7520U, 14\" IPS antireflexný 1920 × 1080, RAM 16GB LPDDR5, AMD Radeon 610M Graphics, SSD 1000GB, webkamera, USB 3.2 Gen 1, USB-C, WiFi 6, hmotnosť 1,4 kg, Windows 11 Home', 675, 'https://image.alza.cz/products/HPCN1002j2/HPCN1002j2.jpg?width=500&height=500', 1),
-(17, 'ASUS Vivobook 15 X1504ZA-BQ147W Cool Silver', 'Notebook – Intel Core i5 1235U Alder Lake, 15.6\" IPS antireflexný 1920 × 1080, RAM 16GB DDR4, Intel Iris Xe Graphics, SSD 512GB, numerická klávesnica, podsvietená klávesnica, webkamera, USB 3.2 Gen 1, USB-C, WiFi 5, Bluetooth, hmotnosť 1,7 kg, Window', 479, 'https://image.alza.cz/products/NA567g52j2a/NA567g52j2a.jpg?width=500&height=500', 1);
+(15, 'ASUS Vivobook Go 15 E1504GA-BQ133WS Mixed Black', 'Notebook – Intel Processor N100, 15.6\" IPS antireflexný 1920 × 1080, RAM 4GB DDR4, Intel UHD Graphics, Flash 128GB, numerická klávesnica, webkamera, USB 3.2 Gen 1, USB-C, WiFi 5, Bluetooth, hmotnosť 1,63 kg, Windows 11 S', 289, 'https://image.alza.cz/products/NAB519B1/NAB519B1.jpg?width=500&height=500', 3),
+(16, 'HP 14-em0920nc Natural Silver', 'Notebook – AMD Ryzen 5 7520U, 14\" IPS antireflexný 1920 × 1080, RAM 16GB LPDDR5, AMD Radeon 610M Graphics, SSD 1000GB, webkamera, USB 3.2 Gen 1, USB-C, WiFi 6, hmotnosť 1,4 kg, Windows 11 Home', 675, 'https://image.alza.cz/products/HPCN1002j2/HPCN1002j2.jpg?width=500&height=500', 3),
+(17, 'ASUS Vivobook 15 X1504ZA-BQ147W Cool Silver', 'Notebook – Intel Core i5 1235U Alder Lake, 15.6\" IPS antireflexný 1920 × 1080, RAM 16GB DDR4, Intel Iris Xe Graphics, SSD 512GB, numerická klávesnica, podsvietená klávesnica, webkamera, USB 3.2 Gen 1, USB-C, WiFi 5, Bluetooth, hmotnosť 1,7 kg, Window', 479, 'https://image.alza.cz/products/NA567g52j2a/NA567g52j2a.jpg?width=500&height=500', 3),
+(18, 'Acer Nitro V15 Shale Black', 'Herný notebook – Intel Core i5 13420H Raptor Lake, 15.6\" IPS antireflexný 1920 × 1080 144Hz, RAM 16GB DDR5, NVIDIA GeForce RTX 2050 4GB, SSD 1000GB, podsvietená klávesnica, webkamera, USB 3.2 Gen 1, USB-C, čítačka odtlačkov prstov, WiFi 6, hmotnosť 2', 749, 'https://image.alza.cz/products/NC108c7i09c1/NC108c7i09c1.jpg?width=500&height=500', 1),
+(19, 'Acer Nitro 5 Obsidian Black', 'Herný notebook – Intel Core i9 12900H Alder Lake, 17.3\" IPS antireflexný 2560 × 1440 165Hz, RAM 32GB DDR5, NVIDIA GeForce RTX 4060 8GB 140 W (MUX Switch), SSD 1000GB, podsvietená RGB klávesnica, webkamera, USB 3.2 Gen 1, USB 3.2 Gen 2, WiFi 6, hmotno', 1499, 'https://image.alza.cz/products/NC108c7i06x2/NC108c7i06x2.jpg?width=500&height=500', 1),
+(20, 'ASUS ROG Strix G16 G614JZ-N3001W Eclipse Gray kovo', 'Herný notebook – Intel Core i7 13650HX Raptor Lake, 16\" IPS antireflexný 1920 × 1200 165Hz, RAM 16GB DDR5, NVIDIA GeForce RTX 4080 12GB 175 W (MUX Switch), SSD 512GB, podsvietená RGB klávesnica, webkamera, USB 3.2 Gen 2, USB-C, WiFi 6, WiFi, Bluetoot', 1999, 'https://image.alza.cz/products/NA683x60p2/NA683x60p2.jpg?width=500&height=500', 1),
+(21, 'ASUS TUF Gaming F15 FX506HF-HN004 Graphite Black', 'Herný notebook – Intel Core i5 11400H Tiger Lake, 15.6\" IPS antireflexný 1920 × 1080 144Hz, RAM 16GB DDR4, NVIDIA GeForce RTX 2050 4GB 70 W, SSD 512GB, numerická klávesnica, podsvietená RGB klávesnica, webkamera, USB 3.2 Gen 1, WiFi 6, hmotnosť 2,3 k', 739, 'https://image.alza.cz/products/NA667d90j5a/NA667d90j5a.jpg?width=500&height=500', 1);
 
 -- --------------------------------------------------------
 
@@ -167,7 +171,7 @@ ALTER TABLE `kategorie`
 -- AUTO_INCREMENT for table `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `user`
