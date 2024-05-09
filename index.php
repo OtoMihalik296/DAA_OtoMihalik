@@ -95,8 +95,8 @@ $conn->close();
             <select id="sort-by">
                 <option value="name_asc">Názov (A-Z)</option>
                 <option value="name_desc">Názov (Z-A)</option>
-                <option value="price_desc">Cena ↑</option>
-                <option value="price_asc">Cena ↓</option>
+                <option value="price_asc">Cena ↑</option>
+                <option value="price_desc">Cena ↓</option>
                 <option value="id_asc">ID ↑</option>
                 <option value="id_desc">ID ↓</option>
             </select>
