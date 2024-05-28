@@ -52,15 +52,27 @@ $sql = "SELECT p.id, p.nazov AS product_name, p.popis AS description, p.cena AS 
 $result = $conn->query($sql);
 
 $products = [];
+$ceny = [];
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $products[] = $row;
+        $ceny[] = $row['price'];
     }
 } else {
     echo "0 results";
 }
 
+// Calculate statistics
+sort($ceny);
+$nizka = min($ceny);
+$vysoka = max($ceny);
+$midIndex = floor(count($ceny) / 2);
+if (count($ceny) % 2 == 0) {
+    $stred = ($ceny[$midIndex - 1] + $ceny[$midIndex]) / 2;
+} else {
+    $stred = $ceny[$midIndex];
+}
 
 $conn->close();
 ?>
@@ -78,12 +90,16 @@ $conn->close();
         #kategoria {
             margin: 1rem 0;
             position: absolute;
-            bottom:1rem;
-            left:40%;
+            bottom: 1rem;
+            left: 40%;
+        }
+        .statistics {
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
+    
 <main>
     <div class="left-nav">
         <h2>Notebooky</h2>
@@ -102,12 +118,12 @@ $conn->close();
             </select>
         </form>
         <div id="price-range-slider">
-            <div style="display:flex; flex-direction: row; justify-content: space-evenly; align-items:center; width:100%;">
+            <div style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: center; width: 100%;">
                 <span>0€</span>
                 <p>-</p>
                 <span>2000€</span>
             </div>
-            <div style="display:flex; flex-direction: row;">
+            <div style="display: flex; flex-direction: row;">
                 <input type="range" id="min-price" min="0" max="2000" value="0">
                 <input type="range" id="max-price" min="0" max="2000" value="2000">
             </div>
@@ -119,6 +135,11 @@ $conn->close();
             <option value="Bežný">Bežný</option>
         </select>
         <a href="admin.php">Admin</a>
+        <div class="statistics">
+            <p>Najnižšia cena: <?php echo $nizka; ?> €</p>
+            <p>Najvyššia cena: <?php echo $vysoka; ?> €</p>
+            <p>Stredná cena: <?php echo $stred; ?> €</p>
+        </div>
     </div>
 
     <div class="products">
@@ -142,30 +163,26 @@ $conn->close();
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-         
-        const categoryDropdown = document.getElementById('category-dropdown');
+    const categoryDropdown = document.getElementById('category-dropdown');
 
-        
-        categoryDropdown.addEventListener('change', function() {
-            const selectedCategory = this.value; 
-            filterProducts(selectedCategory); 
-        });
-
-        
-        function filterProducts(category) {
-            const products = document.querySelectorAll('.product-card');
-
-            products.forEach(function(product) {
-                const productCategory = product.querySelector('p').textContent.trim();
-
-                
-                if (category === 'all' || productCategory === category) {
-                    product.style.display = 'block';
-                } else {
-                    product.style.display = 'none';
-                }
-            });
-        }
+    categoryDropdown.addEventListener('change', function() {
+        const selectedCategory = this.value; 
+        filterProducts(selectedCategory); 
     });
-    </script>
+
+    function filterProducts(category) {
+        const products = document.querySelectorAll('.product-card');
+
+        products.forEach(function(product) {
+            const productCategory = product.querySelector('p').textContent.trim();
+
+            if (category === 'all' || productCategory === category) {
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
+        });
+    }
+});
+</script>
 </html>
